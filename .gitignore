@@ -1,0 +1,5 @@
+backend/Task5_MusicShowcase/.idea/
+backend/Task5_MusicShowcase/Task5_MusicShowcase.sln.DotSettings.user
+frontend/node_modules/
+frontend/dist/
+frontend/.env

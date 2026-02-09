@@ -1,0 +1,19 @@
+.emptyContainer {
+    padding: 40px;
+    text-align: center;
+}
+
+.scrollWrapper {
+    overflow: hidden !important;
+}
+
+.loaderContainer {
+    text-align: center;
+    padding: 20px;
+}
+
+.endMessage {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+}

@@ -1,0 +1,75 @@
+.card {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.cardBody {
+    padding: 0 !important;
+}
+
+.indexCol {
+    color: #bfbfbf;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.songTitle {
+    font-weight: 600;
+    font-size: 15px;
+    color: #262626;
+}
+
+.artist {
+    color: #595959;
+    font-size: 15px;
+}
+
+.genreTag {
+    border-radius: 20px;
+    padding: 0 12px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 22px;
+    margin-right: 0;
+}
+
+.likes {
+    color: #2e9800;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.likeIcon {
+    font-size: 12px;
+    margin-left: 4px;
+}
+
+.albumText {
+    color: #595959;
+    font-size: 14px;
+}
+
+.albumTextSingle {
+    color: #8c8c8c;
+    font-style: italic;
+}
+
+.pagination {
+    padding: 20px 0;
+    margin: 0 !important;
+}
+
+:global(.clickable-row) {
+    cursor: pointer;
+}
+
+:global(.ant-table-thead > tr > th) {
+    background: #fafafa !important;
+    color: #8c8c8c !important;
+    font-size: 11px !important;
+    text-transform: uppercase;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
+}

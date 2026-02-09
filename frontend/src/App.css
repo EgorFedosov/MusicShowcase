@@ -1,0 +1,23 @@
+.app-layout {
+    min-height: 100vh;
+}
+
+.app-content {
+    padding: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.toolbar-wrapper {
+    margin-bottom: 24px;
+}
+
+.content-wrapper {
+    min-height: 400px;
+}
+
+.app-footer {
+    text-align: center;
+    color: #8c8c8c;
+}
