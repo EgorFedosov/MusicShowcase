@@ -15,7 +15,7 @@ namespace Task5_MusicShowcase.Services
         {
             return GetStableHash($"{userSeed}_{likesAverage}_{songIndex}");
         }
-        
+
         private static int GetStableHash(string input)
         {
             var inputBytes = Encoding.UTF8.GetBytes(input);

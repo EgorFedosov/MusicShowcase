@@ -1,7 +1,6 @@
-﻿namespace Task5_MusicShowcase.Services.Interfaces
+﻿namespace Task5_MusicShowcase.Services.Interfaces;
+
+public interface IMusicGenerator
 {
-    public interface IMusicGenerator
-    {
-        byte[] GenerateTrack(long seed);
-    }
+    byte[] GenerateTrack(long seed, string genre);
 }

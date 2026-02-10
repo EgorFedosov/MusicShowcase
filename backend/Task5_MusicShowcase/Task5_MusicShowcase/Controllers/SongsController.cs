@@ -39,9 +39,9 @@ namespace Task5_MusicShowcase.Controllers
         }
 
         [HttpGet("audio")]
-        public IActionResult GetAudio([FromQuery] long seed)
+        public IActionResult GetAudio([FromQuery] long seed, [FromQuery] string genre = "Pop")
         {
-            var audioBytes = musicGenerator.GenerateTrack(seed);
+            var audioBytes = musicGenerator.GenerateTrack(seed, genre);
             return File(audioBytes, WavMimeType);
         }
     }

@@ -38,7 +38,6 @@ namespace Task5_MusicShowcase.Services
             using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
             {
                 var startIndex = (request.Page - 1) * request.PageSize;
-
                 for (var i = 0; i < request.PageSize; i++)
                 {
                     AddSongToArchive(archive, request, startIndex + i + 1);
@@ -50,22 +49,23 @@ namespace Task5_MusicShowcase.Services
 
         private void AddSongToArchive(ZipArchive archive, GenerationRequest request, int index)
         {
-            var (seed, title, artist) = GetSongMetadata(request, index);
+            var (seed, title, artist, genre) = GetSongMetadata(request, index);
             var fileNameBase = $"{SanitizeFileName(artist)} - {SanitizeFileName(title)}";
-            
-            var audioBytes = musicGenerator.GenerateTrack(seed);
+
+            var audioBytes = musicGenerator.GenerateTrack(seed, genre);
             AddZipEntry(archive, $"{fileNameBase}.wav", audioBytes);
-            
+
             var coverBytes = coverGenerator.GenerateCover(seed, title, artist);
             AddZipEntry(archive, $"{fileNameBase}.png", coverBytes);
         }
 
-        private (long Seed, string Title, string Artist) GetSongMetadata(GenerationRequest request, int index)
+        private (long Seed, string Title, string Artist, string Genre) GetSongMetadata(GenerationRequest request,
+            int index)
         {
             var contentSeed = seedCalculator.GetContentSeed(request.Seed, request.Region, index);
             var faker = CreateFaker(request.Region, contentSeed);
 
-            return (contentSeed, faker.Commerce.ProductName(), faker.Name.FullName());
+            return (contentSeed, faker.Commerce.ProductName(), faker.Name.FullName(), faker.Music.Genre());
         }
 
         private static void AddZipEntry(ZipArchive archive, string fileName, byte[] content)
@@ -87,6 +87,7 @@ namespace Task5_MusicShowcase.Services
             var faker = CreateFaker(request.Region, contentSeed);
             var title = faker.Lorem.Sentence(faker.Random.Int(2, 5)).TrimEnd('.');
             var artist = faker.Name.FullName();
+            var genre = faker.Music.Genre();
 
             return new SongDto
             {
@@ -94,11 +95,11 @@ namespace Task5_MusicShowcase.Services
                 Title = title,
                 Artist = artist,
                 Album = faker.Random.Bool(AlbumProbability) ? faker.Commerce.ProductName() : SingleAlbumTitle,
-                Genre = faker.Music.Genre(),
+                Genre = genre,
                 Review = faker.Rant.Review(),
                 Likes = GenerateLikes(request, index),
                 CoverUrl = GetCoverUrl(contentSeed, title, artist),
-                AudioUrl = GetAudioUrl(contentSeed)
+                AudioUrl = GetAudioUrl(contentSeed, genre)
             };
         }
 
@@ -123,6 +124,7 @@ namespace Task5_MusicShowcase.Services
         private static string GetCoverUrl(int seed, string title, string artist) =>
             $"{CoverRoute}?seed={seed}&title={Uri.EscapeDataString(title)}&artist={Uri.EscapeDataString(artist)}";
 
-        private static string GetAudioUrl(int seed) => $"{AudioRoute}?seed={seed}";
+        private static string GetAudioUrl(int seed, string genre) =>
+            $"{AudioRoute}?seed={seed}&genre={Uri.EscapeDataString(genre)}";
     }
 }

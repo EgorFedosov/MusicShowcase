@@ -1,7 +1,6 @@
-﻿namespace Task5_MusicShowcase.Services.Interfaces
+﻿namespace Task5_MusicShowcase.Services.Interfaces;
+
+public interface ICoverGenerator
 {
-    public interface ICoverGenerator
-    {
-        byte[] GenerateCover(long seed, string title, string artist);
-    }
+    byte[] GenerateCover(long seed, string title, string artist);
 }
